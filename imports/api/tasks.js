@@ -21,9 +21,7 @@ Meteor.methods({
     check(text, String);
  
     // Make sure the user is logged in before inserting a task
-    const task = Tasks.findOne(taskId);
-    if (task.private && task.owner !== this.userId) {
-      // If the task is private, make sure only the owner can delete it
+    if (! this.userId) {
       throw new Meteor.Error('not-authorized');
     }
  
